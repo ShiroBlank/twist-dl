@@ -27,7 +27,7 @@ You can also download anime via CLI if that's what you prefer. Down below you ca
 $ twist-dl -h
 ```
 ```
-Usage: twist-dl -a <anime name> -e <episode> [-o <output>]
+Usage: twist-dl -a <anime name> [-o <output>]
 
 Options:
 
