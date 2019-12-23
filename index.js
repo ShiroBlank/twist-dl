@@ -11,7 +11,7 @@ const
     argv = require('minimist')(process.argv.slice(2), {alias: {
         anime: 'a', episode: 'e', output: 'o', help: 'h', silent: 's', english: 'E'
     }})
-    
+
 const
     baseUrl = 'https://twist.moe',
     aesKey = "LXgIVP&PorO68Rq7dTx8N^lP!Fa5sGJ^*XK",
@@ -58,13 +58,10 @@ Options:
         }, {})
 
         let source = argv.episode == 'latest' ? sources[Object.keys(sources).pop()] : sources[`Episode ${argv.episode}`]
-            
+
         if (!source && !interactive) throw new Error('Episode not available or series wasn\'t found.')
 
-        const pickedEpisodes = argv.episode ? (typeof(argv.episode) === 'string' && argv.episode != 'latest' ? getArrayOfEpisodes(sources, argv.episode) : [source]) : (await (new MultiSelect({ // Choices are broken, they don't read the value field, workaround present
-            name: 'episodes', message: `Select episodes: (${getTitle(selectedAnime)})`, /*limit: 24,*/
-            choices: Object.keys(sources)
-        })).run()).map(x => sources[x])
+        const pickedEpisodes = sourceList;
 
         // use console.error so we don't write to stdout but stderr (in case of piping)
         console.error(`\n  ${cyan('twist-dl')} is currently under developement, if any problems occur, please ${red('submit an issue')} on the GitHub's repo.`)
