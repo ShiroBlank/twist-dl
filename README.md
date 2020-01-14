@@ -1,13 +1,6 @@
 # twist-dl-mass-download
 Simple twist.moe mass anime downloader
 
-## Installation
-
-Install it via npm as a global module
-```bash
-npm i twist-dl -g
-```
-
 ## Usage
 
 ### Interactive CLI
