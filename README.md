@@ -29,6 +29,8 @@ Options:
   -h, --help        Displays this message
   -s, --silent      Suppress any (except of donation message) output
   -E, --english     Search anime names using English titles
+  -f, --force       Always download, never restore broken downloads
+  -l, --list        Instead of downloading, pipe out a list of selected episodes
 ```
 #### Examples
 ```bash
