@@ -67,11 +67,7 @@ Options:
 
         if (!source && !interactive) throw new Error('Episode not available or series wasn\'t found.')
 
-        const pickedEpisodes = argv.episode ? (typeof(argv.episode) === 'string' && argv.episode != 'latest' ? getArrayOfEpisodes(sources, argv.episode) : [source]) : (await (new MultiSelect({ // Choices are broken, they don't read the value field, workaround present
-            name: 'episodes', message: `Select episodes: (${getTitle(selectedAnime)})`, /*limit: 24,*/
-            choices: Object.keys(sources),
-            stdout: process.stderr
-        })).run()).map(x => sources[x])
+        const pickedEpisodes = sourceList;
 
         // use console.error so we don't write to stdout but stderr (in case of piping)
         console.error(`\n  ${cyan('twist-dl')} is currently under developement, if any problems occur, please ${red('submit an issue')} on the GitHub's repo.`)

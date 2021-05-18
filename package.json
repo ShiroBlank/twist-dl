@@ -21,6 +21,7 @@
     "enquirer": "^2.3.4",
     "minimist": "^1.2.2",
     "node-fetch": "^2.6.0",
+    "package.json": "^2.0.1",
     "progress": "^2.0.3"
   },
   "bin": {
