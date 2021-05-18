@@ -1,5 +1,5 @@
 # twist-dl-mass-download
-Simple twist.moe mass anime downloader
+Simple twist.moe mass anime downloader modified too automatically download entire seasons.
 
 ## Usage
 
