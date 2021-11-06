@@ -80,7 +80,9 @@ Options:
         ensureDirectoryExists(path.resolve(process.cwd(), argv.output || ''))
 
         for (let i = 0; i < pickedEpisodes.length; i++) {
-            const url = (animeInfo.ongoing ? activeCdnUrl : cdnUrl) + decryptSource(pickedEpisodes[i].source)
+            const url = encodeURI(
+                (animeInfo.ongoing ? activeCdnUrl : cdnUrl) + decryptSource(pickedEpisodes[i].source)
+            )
 
             if(argv.list){
                 process.stdout.write(url+ '\n')
@@ -120,7 +122,7 @@ function decryptSource(source){
     return aes.decrypt(source, aesKey).toString(crypto.enc.Utf8).trim()
 }
 function downloadWithFancyProgressbar(url, text){
-    const outputFile = path.join(path.resolve(process.cwd(), argv.output || ''), path.basename(url))
+    const outputFile = path.join(path.resolve(process.cwd(), argv.output || ''), decodeURIComponent(path.basename(url)))
     return new Promise(async (resolve,reject) => {
         let size = argv.force ? 0 : await getStartRange(outputFile)
         fetch(url, { headers: { 'user-agent': userAgent, 'referer': baseUrl, 'range': `bytes=${size}-` }, compress: false }).then(res => {
@@ -128,7 +130,7 @@ function downloadWithFancyProgressbar(url, text){
                 console.error(`${text} [skipped - already downloaded]`)
                 return resolve()
             }
-            if(!res.ok) return reject(res.statusText)
+            if(!res.ok) return reject(`${res.status} ${res.statusText}`)
 
             let progress = argv.silent ? { tick:()=>{/* stub */} } : new ProgressBar(`${text} [:bar] :rate/bps :percent :etas`, {
                 complete: '=', incomplete: '.', width: 24, total: parseInt(res.headers.get('content-length'))
